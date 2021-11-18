@@ -1,0 +1,33 @@
+{% extends 'lawyer/base.html' %}
+{% block menu %}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 justify-content-center">
+		{% for m in menu %}
+			{% if m.active %}
+			<li class="nav-item">
+			  <a class="nav-link active" aria-current="page" href="{% url m.url %}">{{ m.title }}</a>
+			</li>
+			{% else %}
+			<li class="nav-item">
+			  <a class="nav-link" href="{% url m.url %}">{{ m.title }}</a>
+			</li>
+			{% endif %}
+		{% endfor %}
+      </ul>
+    </div>
+	{% endblock %}
+<!-- partial:index.partial.html -->
+{% block content %}
+<div style="min-height: 90vh;">
+	<div style="width:90%; margin: 0 auto; color: #fff; text-align: center;">
+		<h1>Спасибо за доверие к нашей компании!</h1>
+	</div>
+	<div style="width:60%; margin: 100px auto;">
+		<h3 style="color: #fff;">{{ name }},</h3>
+		<h4 style="color: rgba(255,255,255,.55); margin-top: 30px;">Ваша заявка <span class="text-light">№{{ reg }}</span> успешно сформирована. Отследить заявку можно по <a href="{% url 'search' %}" style="color: #fff;">ссылке</a>
+		<br><br>Наши специалисты ожидают Вас по адресу: <span class="text-light">г. Москва, ул. ​Большая Лубянка, д.2, 101000</span>
+		<br><br>Дата записи: <span class="text-light">{{ date }}</span><h4>
+	</div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,84 @@
+{% extends 'lawyer/base.html' %}
+{% block menu %}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 justify-content-center">
+		{% for m in menu %}
+			{% if m.active %}
+			<li class="nav-item">
+			  <a class="nav-link active" aria-current="page" href="{% url m.url %}">{{ m.title }}</a>
+			</li>
+			{% else %}
+			<li class="nav-item">
+			  <a class="nav-link" href="{% url m.url %}">{{ m.title }}</a>
+			</li>
+			{% endif %}
+		{% endfor %}
+      </ul>
+    </div>
+	{% endblock %}
+<!-- partial:index.partial.html -->
+{% block content %}
+<div style="min-height: 90vh;">
+<form action='' class='form' method="post" style="min-height: 90vh;">
+	{% csrf_token %}
+  <p class='field required'>
+    <label class='label required' for='name'>ФИО</label>
+    <input class='text-input' id='name' name='name' required type='text'>
+  </p>
+  <p class='field required half'>
+    <label class='label required' for='passport'>Серия и номер паспорта <br><span style="font-size: 14px;">формат: 1234 567890</span></label>
+    <input class='text-input' id='passport' name='passport' required type='passport'>
+  </p>
+  <p class='field required half'>
+    <label class='label required' for='phone'>Телефон <br><span style="font-size: 14px;">формат: 71234567890</span></label>
+    <input class='text-input' id='phone' name='phone' required type='phone'>
+  </p>
+  
+  <div class='field'>
+    <label class='label'>Сегмент права</label>
+    <ul class='options'>
+	{% for case in cases %}
+      <li class='option'>
+        <input class='option-input' id='cases-type-{{ case.id }}' name='option-cases' type='radio' value={{ case.id }}>
+        <label class='option-label' for='cases-type-{{ case.id }}'>{{ case.type }}</label>
+      </li>
+	{% endfor %}
+    </ul>
+  </div>
+  
+  <div class='field'>
+    <label class='label'>Специализация</label>
+    <ul class='options'>
+	{% for s in scope %}
+      <li class='option'>
+        <input class='option-input' id='option-scope-{{ s.id }}' name='option-scope' type='radio' value={{ s.id }}>
+        <label class='option-label' for='option-scope-{{ s.id }}'>{{ s.type }}</label>
+      </li>
+	{% endfor %}
+    </ul>
+  </div>
+  
+  <div class='field required'>
+    <label class='label required'>Тип услуги</label>
+    <ul class='options'>
+	{% for service in services %}
+      <li class='option'>
+        <input class='option-input' id='option-service-{{ service.id }}' name='option-service' type='radio' value={{ service.id }} required>
+        <label class='option-label' for='option-service-{{ service.id }}' required>{{ service.type }}</label>
+      </li>
+	{% endfor %}
+    </ul>
+  </div>
+  
+  <p class='field required'>
+    <label class='label required' for='content'>Кратко опишите вашу проблему</label>
+    <textarea class='textarea' cols='50' id='content' name='content' rows='4' required></textarea>
+  </p>
+  
+  <p class='field'>
+    <input class='button' type='submit' value='Отправить'>
+  </p>
+</form>
+</div>
+{% endblock %}
+

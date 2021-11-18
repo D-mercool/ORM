@@ -1,0 +1,46 @@
+{% extends 'lawyer/base.html' %}
+{% block menu %}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 justify-content-center">
+		{% for m in menu %}
+			{% if m.active %}
+			<li class="nav-item">
+			  <a class="nav-link active" aria-current="page" href="{% url m.url %}">{{ m.title }}</a>
+			</li>
+			{% else %}
+			<li class="nav-item">
+			  <a class="nav-link" href="{% url m.url %}">{{ m.title }}</a>
+			</li>
+			{% endif %}
+		{% endfor %}
+      </ul>
+    </div>
+	{% endblock %}
+<!-- partial:index.partial.html -->
+{% block content %}
+<div style="height: 90vh">
+<div style="background: url(https://monzalvoabogados.com/wp-content/uploads/2016/07/AdobeStock_99594662.jpeg); background-position: 100% 80%;" class="jumbotron bg-cover text-white">
+    <div class="container py-5 text-center">
+        <h1 class="display-4 font-weight-bold">Адвокатская контора by Mercool</h1>
+        <p class="font-italic mb-0">Профессиональная защита ваших интересов<br>Полный комплекс юридических услуг<br>Cопровождение в суде</p>
+        <br>
+        <a href="{% url 'client' %}" role="button" class="btn px-5" style="background-color: #E8474C; color: #fff;">Записаться на прием</a>
+    </div>
+</div>
+
+<div class="container py-5">
+    <h2 class="h3 font-weight-bold" style="color: #fff;">На страже ваших интересов</h2>
+    <div class="row">
+        <div class="col-lg-10 mb-4">
+            <p class="font-italic text-muted"><strong class="font-weight-bold text-light">Профессиональность, эффективность и индивидуальность</strong> - основные принципы, выработанные нашей командой за многолетнюю практику оказания профессиональной юридической помощи.</p>
+            <p class="font-italic text-muted">Наша цель - <strong class="font-weight-bold text-light">разрешить</strong> ваш правой вопрос, <strong class="font-weight-bold text-light">минимизировать</strong> негативные для вас последствия, <strong class="font-weight-bold text-light">сохранить</strong> принадлежащие вам права, защитив их от чьих-либо посягательств, а не заключение с вами любой ценой соглашения об оказании юридической помощи или изображения «бурной деятельности» вокруг вас без достижения результатов.</p>
+        </div>
+        <div class="col-lg-8">
+            <p class="font-italic text-muted">Важно <strong class="font-weight-bold text-light">доверять</strong> выбранному адвокату, <strong class="font-weight-bold text-light">быть уверенным</strong> в его профессиональных знаниях, опыте и ответственности перед вами, <strong class="font-weight-bold text-light">быть уверенным</strong> в том, что адвокат сделает все зависящее от него для достижения поставленной вами цели.</p>
+        </div>
+    </div>
+</div>
+	
+</div>
+{% endblock %}
+

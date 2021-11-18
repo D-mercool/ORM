@@ -1,0 +1,67 @@
+{% extends 'lawyer/base.html' %}
+{% block menu %}
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0 w-100 justify-content-center">
+		{% for m in menu %}
+			{% if m.active %}
+			<li class="nav-item">
+			  <a class="nav-link active" aria-current="page" href="{% url m.url %}">{{ m.title }}</a>
+			</li>
+			{% else %}
+			<li class="nav-item">
+			  <a class="nav-link" href="{% url m.url %}">{{ m.title }}</a>
+			</li>
+			{% endif %}
+		{% endfor %}
+      </ul>
+    </div>
+	{% endblock %}
+<!-- partial:index.partial.html -->
+{% block content %}
+<div style="min-height: 90vh;">
+ <form action='' class='form top-cover center-block' method="post">
+	{% csrf_token %}
+  <p class='field required half'>
+    <label class='label required' for='num'>Номер заявки</label>
+    <input class='text-input' id='num' name='num' required type='num'>
+  </p>
+  <p class='field required half'>
+    <label class='label required' for='name'>Фамилия</label>
+    <input class='text-input' id='name' name='name' required type='name'>
+  </p>
+  <p class='field'>
+    <input class='button' type='submit' value='Найти' style="margin-left: auto;">
+  </p>
+</form>
+
+{% if case %}
+<div style="max-width: 45em; margin: 50px auto; text-align: center">
+<table class="table table-dark table-bordered">
+  <thead>
+    <tr>
+		<th scope="col">Номер</th>
+      <th scope="col">ФИО</th>
+      <th scope="col">Услуга</th>
+      <th scope="col">Тип дела</th>
+	  <th scope="col">Цена</th>
+	  <th scope="col">Дата записи</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      {% for c in case %}
+	  <td>{{ c }}</td>
+	  {% endfor %}
+    </tr>
+  </tbody>
+</table>
+</div>
+{% else %}
+	<div style="max-width: 45em; margin: 50px auto; text-align: center">
+		<h3>Данных не найдено</h3>
+	</div>
+{% endif %}
+
+</div>
+{% endblock %}
+
